@@ -32,8 +32,9 @@ dependencies {
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
-	compile('javax.servlet:jstl')
-	compile("org.apache.tomcat.embed:tomcat-embed-jasper")
+	implementation 'org.jetbrains:annotations:15.0'
+	compile 'org.apache.tomcat.embed:tomcat-embed-jasper'
+	compile 'javax.servlet:jstl'
 }
 
 test {

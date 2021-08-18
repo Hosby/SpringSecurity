@@ -1,12 +1,16 @@
-# mysql 설정
+# mysql
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/security?serverTimezone=UTC&characterEncoding=UTF-8
     username: root
     password: admin
-# jsp 위치
+# jsp
   mvc:
     view:
       prefix: /WEB-INF/jsp/
       suffix: .jsp
+  security:
+    user:
+      name: admin
+      password: password
