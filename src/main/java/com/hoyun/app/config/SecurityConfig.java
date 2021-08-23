@@ -1,6 +1,7 @@
 package com.hoyun.app.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -8,6 +9,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
@@ -92,7 +95,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .expiredUrl("/expired");//세션이 만료된 경우 이동할 페이지
     }*/
 
-    @Override
+    /*@Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
@@ -116,5 +119,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
                 .exceptionHandling()
                 .accessDeniedPage("/accessDenied_page");
+    }*/
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests()
+                .antMatchers("/", "/login","/service","/resources/**","/create").permitAll()
+                .antMatchers("/admin").hasRole("ADMIN")
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .permitAll()
+                .and()
+                .logout()
+                .permitAll();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 }
