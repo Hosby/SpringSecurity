@@ -16,7 +16,7 @@
 <h1>${message}</h1>
 
 <form action="${pageContext.request.contextPath}/joinSuccess">
-    <input type="text" name="userName" placeholder="아이디">
+    <input type="text" name="username" placeholder="아이디">
     <input type="password" name="password" placeholder="비밀번호">
     <input type="submit" value="회원가입">
 </form>

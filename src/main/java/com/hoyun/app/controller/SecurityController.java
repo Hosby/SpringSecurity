@@ -62,7 +62,6 @@ public class SecurityController {
     // 내 정보 페이지
     @RequestMapping(value = "/user/myInfo", method = RequestMethod.GET)
     public String myInfo(Model model, Account account) {
-        account.getUsername();
 
         model.addAttribute("userName", account.getUsername());
         model.addAttribute("password", account.getPassword());

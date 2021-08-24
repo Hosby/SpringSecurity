@@ -18,59 +18,51 @@ import java.util.List;
 @Service
 public class AccountService implements UserDetailsService {
     @Autowired
-    AccountRepository accounts;
+    AccountRepository accountRepository;
 
     @Autowired
     PasswordEncoder passwordEncoder;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // TODO Auto-generated method stub
-        Account account = accounts.findById(username);
-        account.setAuthorities(getAuthorities(username));
+    public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
+
+        Account account = accountRepository.findById(id);
+        account.setAuthorities(getAuthorities(id));
 
         UserDetails userDetails = new UserDetails() {
 
             @Override
             public boolean isEnabled() {
-                // TODO Auto-generated method stub
                 return true;
             }
 
             @Override
             public boolean isCredentialsNonExpired() {
-                // TODO Auto-generated method stub
                 return true;
             }
 
             @Override
             public boolean isAccountNonLocked() {
-                // TODO Auto-generated method stub
                 return true;
             }
 
             @Override
             public boolean isAccountNonExpired() {
-                // TODO Auto-generated method stub
                 return true;
             }
 
             @Override
             public String getUsername() {
-                // TODO Auto-generated method stub
                 return account.getUsername();
             }
 
             @Override
             public String getPassword() {
-                // TODO Auto-generated method stub
                 return account.getPassword();
             }
 
             @Override
             public Collection getAuthorities() {
-                // TODO Auto-generated method stub
-
                 return account.getAuthorities();
             }
         };
@@ -79,8 +71,7 @@ public class AccountService implements UserDetailsService {
 
     public Account save(Account account, String role) {
         account.setUsername(account.getUsername());
-        System.out.println("username : "+account.getUsername());
-        System.out.println("password : "+account.getPassword());
+        System.out.println("username : " + account.getUsername());
         account.setPassword(passwordEncoder.encode(account.getPassword()));
         account.setAccountNonExpired(true);
         account.setAccountNonLocked(true);
@@ -88,11 +79,11 @@ public class AccountService implements UserDetailsService {
         account.setEnabled(true);
         System.out.println("Service 진입");
 
-        return accounts.save(account, role);
+        return accountRepository.save(account, role);
     }
 
     public Collection<GrantedAuthority> getAuthorities(String username) {
-        List<String> string_authorities = accounts.findAuthoritiesById(username);
+        List<String> string_authorities = accountRepository.findAuthoritiesById(username);
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
         for (String authority : string_authorities) {
             authorities.add(new SimpleGrantedAuthority(authority));
