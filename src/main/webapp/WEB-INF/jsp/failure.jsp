@@ -13,12 +13,7 @@
 </head>
 
 <body>
-<h1>${message}</h1>
+<h1>로그인을 실패하였습니다.</h1>
 
-<form action="${pageContext.request.contextPath}/joinSuccess">
-    <input type="text" name="userName" placeholder="아이디">
-    <input type="password" name="password" placeholder="비밀번호">
-    <input type="submit" value="회원가입">
-</form>
 </body>
 </html>

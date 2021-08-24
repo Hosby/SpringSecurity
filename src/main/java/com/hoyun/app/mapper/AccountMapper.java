@@ -10,17 +10,17 @@ import java.util.List;
 
 @Mapper
 public interface AccountMapper {
-    @Select("SELECT * FROM user WHERE id=#{id}")
-    Account readAccount(String id);
+    @Select("SELECT * FROM user WHERE id=#{username}")
+    Account readAccount(String username);
 
-    @Select("SELECT authority_name FROM AUTHORITY WHERE username=#{id}")
-    List readAuthorities(String id);
+    @Select("SELECT authority_name FROM AUTHORITY WHERE username=#{username}")
+    List readAuthorities(String username);
 
-    @Insert("INSERT INTO USER VALUES(#{account.id},#{account.password},#{account.isAccountNonExpired},#{account.isAccountNonLocked},#{account.isCredentialsNonExpired},#{account.isEnabled})")
+    @Insert("INSERT INTO USER VALUES(#{account.username},#{account.password},#{account.isAccountNonExpired},#{account.isAccountNonLocked},#{account.isCredentialsNonExpired},#{account.isEnabled})")
     void insertUser(@Param("account") Account account);
 
-    @Insert("INSERT INTO AUTHORITY VALUES(#{id},#{authority})")
-    void insertUserAuthority(@Param("id") String id, @Param("authority") String authority);
+    @Insert("INSERT INTO AUTHORITY VALUES(#{username},#{authority})")
+    void insertUserAuthority(@Param("username") String username, @Param("authority") String authority);
 
     @Select("SELECT* FROM USER")
     List readAllUsers();

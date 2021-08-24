@@ -58,7 +58,7 @@ public class AccountService implements UserDetailsService {
             @Override
             public String getUsername() {
                 // TODO Auto-generated method stub
-                return account.getId();
+                return account.getUsername();
             }
 
             @Override
@@ -77,12 +77,16 @@ public class AccountService implements UserDetailsService {
         return account;
     }
 
-    public Account joinUser(Account account, String role) {
+    public Account save(Account account, String role) {
+        account.setUsername(account.getUsername());
+        System.out.println("username : "+account.getUsername());
+        System.out.println("password : "+account.getPassword());
         account.setPassword(passwordEncoder.encode(account.getPassword()));
         account.setAccountNonExpired(true);
         account.setAccountNonLocked(true);
         account.setCredentialsNonExpired(true);
         account.setEnabled(true);
+        System.out.println("Service 진입");
 
         return accounts.save(account, role);
     }

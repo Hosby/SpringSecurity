@@ -18,8 +18,8 @@ public class AccountRepository {
         return account;
     }
 
-    public Account findById(String username) {
-        return accountMapper.readAccount(username);
+    public Account findById(String id) {
+        return accountMapper.readAccount(id);
     }
 
     public List<String> findAuthoritiesById(String username) {

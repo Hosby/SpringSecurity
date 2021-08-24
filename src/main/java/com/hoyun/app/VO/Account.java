@@ -12,7 +12,7 @@ import java.util.Collection;
 @Getter
 @Setter
 public class Account implements UserDetails {
-    private String id;
+    private String username;
     private String password;
     private boolean isAccountNonExpired;
     private boolean isAccountNonLocked;
@@ -20,12 +20,8 @@ public class Account implements UserDetails {
     private boolean isEnabled;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setPassword(String password) {
@@ -64,7 +60,7 @@ public class Account implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.id;
+        return this.username;
     }
 
     @Override

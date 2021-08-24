@@ -18,49 +18,63 @@ public class SecurityController {
 
     @Autowired
     AccountMapper accountMapper;
-    /*
-    * / 로그인페이지
-    * /login 로그인 완료 기능
-    * /login/success 로그인 성공 페이지
-    * /joinForm 회원가입 페이지
-    * /join 회원가입 완료 기능
-    * */
 
     // 메인페이지/로그인페이지
-    @RequestMapping("/")
-    public String index(Model model, Account account) {
+    @RequestMapping("/index")
+    public String index(Model model) {
         model.addAttribute("message", "Security Hello");
         System.out.println("Controller 로그인 페이지 진입");
-        return "/index";
+        return "index";
     }
 
     // 회원가입 페이지
     @RequestMapping(value = "/joinForm", method = RequestMethod.GET)
-    public String joinPage() {
+    public String joinPage(Model model) {
+        model.addAttribute("message", "회원가입 페이지입니다.");
         System.out.println("Controller 회원가입 페이지 진입");
         return "joinForm";
     }
 
     // 회원가입 처리
-    @RequestMapping(value = "/joinSuccess", method = RequestMethod.POST)
+    @RequestMapping(value = "/joinSuccess", method = RequestMethod.GET)
     public String joinSuccess(Account account) {
-        accountService.joinUser(account, "ROLE_ADMIN");
-        return "/index";
+        accountService.save(account, "ROLE_ADMIN");
+        System.out.println("joinSuccess 진입");
+        return "redirect:/index";
     }
 
     // 로그인 결과 페이지
-    @RequestMapping(value = "/login/success", method = RequestMethod.GET)
+    @RequestMapping(value = "/login/process", method = RequestMethod.POST)
     public String loginSuccess(Model model, Account account) {
         model.addAttribute("message", "Spring Security Home에 오신 것을 환영합니다");
-        model.addAttribute("userId", account.getUsername());
+        model.addAttribute("userName", account.getUsername());
         System.out.println("Controller /login 진입");
         return "success";
     }
 
     // 로그아웃 결과 페이지
     @RequestMapping(value = "/logout/success", method = RequestMethod.GET)
-    public String logoutSuccess(Model model, Account account) {
-        return "/logout";
+    public String logoutSuccess() {
+        System.out.println("Controller 로그아웃 결과 페이지 진입");
+        return "logout";
     }
+
+    // 내 정보 페이지
+    @RequestMapping(value = "/user/myInfo", method = RequestMethod.GET)
+    public String myInfo(Model model, Account account) {
+        account.getUsername();
+
+        model.addAttribute("userName", account.getUsername());
+        model.addAttribute("password", account.getPassword());
+
+        return "myInfo";
+    }
+
+    // 에러페이지
+    @RequestMapping(value = "/login?error=true", method = RequestMethod.GET)
+    public String failure(Model model, Account account) {
+        return "failure";
+    }
+
 
 }

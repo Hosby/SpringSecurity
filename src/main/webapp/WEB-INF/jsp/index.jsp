@@ -14,7 +14,7 @@
 
 <body>
 <h1>${message}</h1>
-<form action="${pageContext.request.contextPath}/login">
+<form action="${pageContext.request.contextPath}/login/success">
     <div>
         아이디: <input type="text" name="userName"/>
     </div>
