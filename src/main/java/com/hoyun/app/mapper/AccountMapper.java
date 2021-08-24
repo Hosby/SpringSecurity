@@ -19,8 +19,8 @@ public interface AccountMapper {
     @Insert("INSERT INTO USER VALUES(#{account.id},#{account.password},#{account.isAccountNonExpired},#{account.isAccountNonLocked},#{account.isCredentialsNonExpired},#{account.isEnabled})")
     void insertUser(@Param("account") Account account);
 
-    @Insert("INSERT INTO AUTHORITY VALUES(#{id},#{autority})")
-    void insertUserAuthority(@Param("id") String id, @Param("autority") String autority);
+    @Insert("INSERT INTO AUTHORITY VALUES(#{id},#{authority})")
+    void insertUserAuthority(@Param("id") String id, @Param("authority") String authority);
 
     @Select("SELECT* FROM USER")
     List readAllUsers();

@@ -77,14 +77,13 @@ public class AccountService implements UserDetailsService {
         return account;
     }
 
-    public Account save(Account account, String role) {
-        // TODO Auto-generated method stub
-
+    public Account joinUser(Account account, String role) {
         account.setPassword(passwordEncoder.encode(account.getPassword()));
         account.setAccountNonExpired(true);
         account.setAccountNonLocked(true);
         account.setCredentialsNonExpired(true);
         account.setEnabled(true);
+
         return accounts.save(account, role);
     }
 

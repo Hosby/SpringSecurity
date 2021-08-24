@@ -95,33 +95,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .expiredUrl("/expired");//세션이 만료된 경우 이동할 페이지
     }*/
 
-    /*@Override
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers("/login", "resources/**", "/join").permitAll()
+        http.authorizeRequests() //페이지 권한 설정
+                .antMatchers("/login", "resources/**", "/joinForm").permitAll()
                 .antMatchers("/admin").hasRole("ADMIN")
-                .antMatchers("/login/success").hasRole("USER")
-                .antMatchers("/member").hasRole("MEMBER")
+                .antMatchers("/user/myInfo").hasRole("USER")
                 .anyRequest().authenticated()
-            .and()
+            .and() // 로그인 설정
                 .formLogin()
-                .loginPage("/login")
-                .loginProcessingUrl("login/process")
-                .defaultSuccessUrl("/login/success")
-                .failureUrl("login?error=true")
+                .loginPage("/index")
+                //.loginProcessingUrl("login/process")
+                .defaultSuccessUrl("/user/login/result")
+                //.failureUrl("login?error=true")
                 .permitAll()
-            .and()
+            .and() // 로그아웃 설정
                 .logout()
                 .permitAll()
-                .logoutUrl("logout")
-                .logoutSuccessUrl("/login")
-            .and()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/user/logout/result")
+            .and() // 403 예외처리 핸들링
                 .exceptionHandling()
-                .accessDeniedPage("/accessDenied_page");
-    }*/
+                .accessDeniedPage("/accessDenied");
+    }
 
-    @Override
+    /*@Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
@@ -134,7 +132,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .permitAll();
-    }
+    }*/
 
     @Bean
     public PasswordEncoder passwordEncoder(){

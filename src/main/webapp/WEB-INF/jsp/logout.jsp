@@ -13,10 +13,10 @@
 </head>
 
 <body>
-<h1>${message} 환영합니다 ${userId} 님</h1>
+<h1> ${userId} 님 로그아웃 되셨습니다</h1>
 
-<form action="${pageContext.request.contextPath}/logout">
-    <input type="submit" value="로그아웃">
+<form action="${pageContext.request.contextPath}/">
+    <input type="submit" value="홈으로 이동">
 </form>
 </body>
 </html>

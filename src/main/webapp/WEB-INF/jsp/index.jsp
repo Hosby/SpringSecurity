@@ -16,15 +16,15 @@
 <h1>${message}</h1>
 <form action="${pageContext.request.contextPath}/login">
     <div>
-        아이디:<input type="text" name="userName"/>
+        아이디: <input type="text" name="userName"/>
     </div>
     <div>
         비밀번호: <input type="password" name="password"/>
+        <input type="submit" value="로그인"/>
     </div>
-    <input type="submit" value="로그인"/>
 </form>
 
-<form action="${pageContext.request.contextPath}/join">
+<form action="${pageContext.request.contextPath}/joinForm">
     <input type="submit" value="회원가입">
 </form>
 </body>
