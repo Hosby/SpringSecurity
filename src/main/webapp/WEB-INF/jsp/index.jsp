@@ -9,12 +9,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
+    <link href="C:\Users\User\Downloads\spring" rel="shortcut icon" type="image/x-icon">
+
     <title>Security Login</title>
 </head>
 
 <body>
 <h1>${message}</h1>
-<form action="${pageContext.request.contextPath}/login/success">
+<form action="${pageContext.request.contextPath}/login/process" method="POST">
     <div>
         아이디: <input type="text" name="userName"/>
     </div>

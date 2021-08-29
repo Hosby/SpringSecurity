@@ -83,17 +83,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+        http
                 .authorizeRequests() //페이지 권한 설정
-                .antMatchers("/index", "resources/**", "/joinForm", "/joinSuccess", "/login", "logout").permitAll()
+                .antMatchers("/index", "resources/**", "/joinForm", "/joinSuccess", "/login/process").permitAll()
                 //.antMatchers("/admin").hasRole("ADMIN")
                 //.antMatchers("/user/myInfo").hasRole("USER")
                 .anyRequest().authenticated()
                 .and() // 로그인 설정
                 .formLogin()
                 .loginPage("/index")
-                .loginProcessingUrl("login/process")
-                //.defaultSuccessUrl("/login/success")
+                .loginProcessingUrl("/login/process")
+                .defaultSuccessUrl("/login/success")
                 .failureUrl("/login?error=true")
                 .permitAll()
                 .and() // 로그아웃 설정

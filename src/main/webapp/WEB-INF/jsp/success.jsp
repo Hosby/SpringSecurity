@@ -13,7 +13,7 @@
 </head>
 
 <body>
-<h1>${message} 환영합니다 ${userName} 님</h1>
+<h1>${message} ${userName} 님</h1>
 
 <form action="${pageContext.request.contextPath}/logout">
     <input type="submit" value="로그아웃">

@@ -3,7 +3,6 @@ package com.hoyun.app.controller;
 import com.hoyun.app.VO.Account;
 import com.hoyun.app.mapper.AccountMapper;
 import com.hoyun.app.service.AccountService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
